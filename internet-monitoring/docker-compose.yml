@@ -1,0 +1,88 @@
+version: "3.1"
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.26.0
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - /var/lib/prometheus:/prometheus
+    user: 1000:1000
+    restart: unless-stopped
+    networks:
+      - default
+      - gateway
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    volumes:
+      - /var/lib/grafana:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    depends_on:
+      - prometheus
+    env_file:
+      - ./grafana/config.monitoring
+    user: 1000:1000
+    restart: unless-stopped
+    networks:
+      - default
+      - gateway
+
+  ping:
+    tty: true
+    stdin_open: true
+    image: prom/blackbox-exporter
+    container_name: blackbox-exporter
+    command:
+      - '--config.file=/config/blackbox.yml'
+    #ports:
+    #  - 9115:9115
+    volumes:
+      - ./blackbox/config:/config
+    restart: unless-stopped
+    networks:
+      - default
+
+  speedtest:
+    tty: true
+    stdin_open: true
+    image: rebelinblue/speedtest-exporter
+    container_name: speedtest-exporter
+    #ports:
+    #  - 9696:9696
+    restart: unless-stopped
+    networks:
+      - default
+
+  node:
+    privileged: true
+    image: prom/node-exporter
+    container_name: node-exporter
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    #ports:
+    #  - 9100:9100
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    restart: unless-stopped
+    networks:
+      - default
+
+networks:
+  gateway:
+    external:
+      name: gateway
+
+  default:
+    internal: true

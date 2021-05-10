@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  plex:
+    image: ghcr.io/linuxserver/plex:bionic
+    container_name: plex
+    network_mode: "host"
+    volumes:
+      - /var/media/plex:/config
+      - /media/NFS:/media/NAS
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      VERSION: "public"
+    restart: unless-stopped
+
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr
+    volumes:
+      - /var/media/sonarr:/config
+      - /media/NFS:/media/NAS
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Europe/London
+    restart: unless-stopped
+    networks:
+      - default
+      - gateway
+
+  tautulli:
+    image: ghcr.io/linuxserver/tautulli
+    container_name: tautulli
+    volumes:
+      - /var/media/tautulli:/config
+      - /var/media/plex/logs:/logs
+    environment:
+      DOCKER_MODS: "" # Forces cURL to be installed so that tautulli2trakt.sh can run
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Europe/London
+    restart: unless-stopped
+    networks:
+      - default
+      - gateway
+
+networks:
+  gateway:
+    external:
+      name: gateway
+
+  default:
+    internal: true

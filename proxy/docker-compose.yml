@@ -1,0 +1,22 @@
+version: "3.1"
+
+services:
+  nginx:
+    image: ghcr.io/linuxserver/nginx
+    container_name: nginx
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/London
+    volumes:
+      - /var/nginx/:/config
+    ports:
+      - 80:80
+    restart: unless-stopped
+    networks:
+      - gateway
+
+networks:
+  gateway:
+    external:
+      name: gateway
