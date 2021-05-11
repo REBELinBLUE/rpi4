@@ -47,8 +47,5 @@ services:
 
 networks:
   gateway:
-    external:
-      name: gateway
-
-  default:
-    internal: true
+    external: true
+    name: gateway

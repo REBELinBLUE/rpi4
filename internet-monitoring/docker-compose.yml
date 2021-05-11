@@ -46,9 +46,6 @@ services:
     volumes:
       - ./blackbox/config:/config
     restart: unless-stopped
-    networks:
-      - default
-      - gateway
 
   speedtest:
     tty: true
@@ -58,9 +55,6 @@ services:
     #ports:
     #  - 9696:9696
     restart: unless-stopped
-    networks:
-      - default
-      - gateway
 
   node:
     privileged: true
@@ -78,13 +72,8 @@ services:
       - /sys:/host/sys:ro
       - /:/rootfs:ro
     restart: unless-stopped
-    networks:
-      - default
 
 networks:
   gateway:
-    external:
-      name: gateway
-
-  default:
-    internal: true
+    external: true
+    name: gateway
