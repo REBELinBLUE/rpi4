@@ -387,11 +387,11 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{humanname}}",
           "refId": "A"
         }
       ],
-      "title": "Up",
+      "title": "up",
       "tooltip": {
         "show": true
       },
