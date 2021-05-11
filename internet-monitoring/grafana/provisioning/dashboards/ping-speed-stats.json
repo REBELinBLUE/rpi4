@@ -449,10 +449,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(probe_http_duration_seconds) by (instance)",
+          "expr": "sum(probe_http_duration_seconds) by (humanname)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{humanname}}",
           "refId": "A"
         }
       ],
