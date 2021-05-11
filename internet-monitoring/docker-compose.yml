@@ -48,6 +48,7 @@ services:
     restart: unless-stopped
     networks:
       - default
+      - gatewy
 
   speedtest:
     tty: true
@@ -59,6 +60,7 @@ services:
     restart: unless-stopped
     networks:
       - default
+      - gatewy
 
   node:
     privileged: true
