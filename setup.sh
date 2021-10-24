@@ -87,7 +87,7 @@ apt install -y nodejs gcc g++ python net-tools
 apt install -y bluetooth bluez libbluetooth-dev libudev-dev
 
 # Needed for Ecovac
-apt instal -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+apt install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
 # Install Homebridge
 npm install -g --unsafe-perm homebridge homebridge-config-ui-x @abandonware/noble
@@ -109,4 +109,10 @@ ln -s $HOME/rpi4/shell/.profile $HOME/.profile
 ln -s $HOME/rpi4/shell/.bashrc $HOME/.bashrc
 ln -s $HOME/rpi4/shell/.dircolors $HOME/.dircolors
 mkdir $HOME/.ssh
+
+#
+# Cockput
+#
+
+apt install -y cockpit cockpit-docker
 
