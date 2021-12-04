@@ -34,7 +34,7 @@ services:
     container_name: tautulli
     volumes:
       - /var/media/tautulli:/config
-      - /var/media/plex/logs:/logs
+      - "/var/media/plex/Library/Application Support/Plex Media Server/Logs:/logs"
     environment:
       DOCKER_MODS: "" # Forces cURL to be installed so that tautulli2trakt.sh can run
       PUID: "1000"

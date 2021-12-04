@@ -12,8 +12,8 @@ chsh -s /usr/bin/fish
 curl -fsSL https://starship.rs/install.sh | bash
 mkdir -p ~/.config/fish
 echo "starship init fish | source" >>  ~/.config/fish/config.fish
-mkdir -p ~/.config && touch ~/.config/starship.toml
-printf "[hostname]\ndisabled = true" >>  ~/.config/starship.toml
+#mkdir -p ~/.config && touch ~/.config/starship.toml
+#eprintf "[hostname]\ndisabled = true" >>  ~/.config/starship.toml
 
 #
 # https://github.com/linuxserver/docker-radarr/issues/118
@@ -29,11 +29,11 @@ rm -f libseccomp2_2.4.4-1~bpo10+1_armhf.deb
 
 apt install -u cifs-utils postfix samba samba-common-bin smbclient
 mkdir /media/NFS
-echo "192.168.1.112:/nfs/Media /media/NFS  nfs      defaults    0       0" >> /etc/fstab
+echo "192.168.1.162:/mnt/md0/media /media/NFS  nfs      defaults    0       0" >> /etc/fstab
 mount /media/NFS
 
 mkdir /media/Backup
-echo "//192.168.1.112/Backup /media/Backup  cifs  username=admin,password=??????,iocharset=utf8,uid=1000,gid=1000,file_mode=0777,dir_mode=0777,nodfs  0  0" >> /etc/fstab
+echo "//192.168.1.162/backup /media/Backup  cifs  username=admin,password=??????,iocharset=utf8,uid=1000,gid=1000,file_mode=0777,dir_mode=0777,nodfs  0  0" >> /etc/fstab
 mount /media/Backup
 
 # mkdir /media/Torrents
