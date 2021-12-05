@@ -40,6 +40,11 @@ mount /media/Backup
 # echo "192.168.1.112:/nfs/Torrents /media/Torrents  nfs      defaults    0       0" >> /etc/fstab
 # mount /media/Torrents
 
+# Disable zeroconf to stop RPI appearing in Finder
+sudo systemctl stop avahi-daemon.socket avahi-daemon.service
+sudo systemctl mask avahi-daemon.socket avahi-daemon.service
+sudo systemctl disable avahi-daemon.socket avahi-daemon.service
+
 mkdir -p /var/media/{plex,sonarr,tautulli}
 
 wget -O /var/media/tautulli/tautulli2trakt.sh https://raw.githubusercontent.com/Generator/tautulli2trakt/master/tautulli2trakt.sh
