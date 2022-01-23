@@ -118,10 +118,3 @@ ln -s $HOME/rpi4/shell/.profile $HOME/.profile
 ln -s $HOME/rpi4/shell/.bashrc $HOME/.bashrc
 ln -s $HOME/rpi4/shell/.dircolors $HOME/.dircolors
 mkdir $HOME/.ssh
-
-#
-# Cockput
-#
-
-apt install -y cockpit cockpit-docker
-
