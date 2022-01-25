@@ -93,7 +93,7 @@ apt install -y nodejs gcc g++ python net-tools
 
 # Needed for Bluetooth for Govee
 # apt install -y pi-bluetooth
-apt install -y bluetooth bluez libbluetooth-dev libudev-dev
+# apt install -y bluetooth bluez libbluetooth-dev libudev-dev
 
 # Needed for Ecovac
 apt install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
@@ -106,7 +106,7 @@ sudo hb-service install --user homebridge
 # Internet Monitoring
 #
 
-mkdir -p /var/lib/{prometheus,grafana}
+# mkdir -p /var/lib/{prometheus,grafana}
 
 #
 # Profile
