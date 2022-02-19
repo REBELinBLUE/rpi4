@@ -14,6 +14,10 @@ start:
 stop:
 	docker-compose down
 
+## Restart the containers
+restart:
+	docker-compose restart
+
 ## Stops the containers, updates the images and then starts the containers again
 update:
 	docker-compose pull
