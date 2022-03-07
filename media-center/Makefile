@@ -23,6 +23,8 @@ update:
 	docker-compose pull
 	docker-compose restart
 	docker image prune -a -f
+	docker-compose stop jackett
+	docker-compose stop transmission
 
 ## Cleanup the names of episodes
 cleanup:
