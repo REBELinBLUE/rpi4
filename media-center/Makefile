@@ -37,7 +37,7 @@ cleanup:
 
 ## Backup the data to the NAS
 backup:
-	rsync -ravz --delete --exclude="plex/" /var/media/ /media/Backup/rpi/
+	rsync -ravz --delete --exclude="plex/" --exclude="torrents/" /var/media/ /media/Backup/rpi/
 	# rsync -ravz --delete /var/lib/homebridge/ /media/Backup/homebridge/
 	tar -vcz --exclude="./Cache" -f /tmp/plex-backup.tar.gz /var/media/plex
 	cp /tmp/plex-backup.tar.gz /media/Backup/
