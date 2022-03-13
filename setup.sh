@@ -33,11 +33,11 @@ apt install -u cifs-utils postfix samba samba-common-bin smbclient
 #sudo systemctl mask nmbd.service
 #sudo systemctl disable nmbd.service
 mkdir /media/NFS
-echo "192.168.1.162:/mnt/md0/media /media/NFS  nfs      defaults    0       0" >> /etc/fstab
+echo "192.168.212.135:/mnt/md0/media /media/NFS  nfs      defaults    0       0" >> /etc/fstab
 mount /media/NFS
 
 mkdir /media/Backup
-echo "//192.168.1.162/backup /media/Backup  cifs  username=admin,password=??????,iocharset=utf8,uid=1000,gid=1000,file_mode=0777,dir_mode=0777,nodfs  0  0" >> /etc/fstab
+echo "//192.168.212.135/backup /media/Backup  cifs  username=stephen,password=??????,iocharset=utf8,uid=1000,gid=1000,file_mode=0777,dir_mode=0777,nodfs  0  0" >> /etc/fstab
 mount /media/Backup
 
 # mkdir /media/Torrents
