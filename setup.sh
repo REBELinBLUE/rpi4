@@ -35,11 +35,7 @@ mkdir /media/Backup
 echo "192.168.115.136:/mnt/md0/backup /media/Backup  nfs      defaults    0       0" >> /etc/fstab
 mount /media/Backup
 
-# mkdir /media/Torrents
-# echo "192.168.1.112:/nfs/Torrents /media/Torrents  nfs      defaults    0       0" >> /etc/fstab
-# mount /media/Torrents
-
-mkdir -p /var/media/{plex,sonarr,tautulli}
+mkdir -p /var/media/{plex,sonarr,tautulli,jackett,transmission,torrents,watch}
 
 wget -O /var/media/tautulli/tautulli2trakt.sh https://raw.githubusercontent.com/Generator/tautulli2trakt/master/tautulli2trakt.sh
 chmod +x /var/media/tautulli/tautulli2trakt.sh
@@ -81,22 +77,12 @@ pip3 install docker-compose
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
 apt install -y nodejs gcc g++ python net-tools
 
-# Needed for Bluetooth for Govee
-# apt install -y pi-bluetooth
-# apt install -y bluetooth bluez libbluetooth-dev libudev-dev
-
 # Needed for Ecovac
 apt install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
 # Install Homebridge
 npm install -g --unsafe-perm homebridge homebridge-config-ui-x @abandonware/noble
 sudo hb-service install --user homebridge
-
-#
-# Internet Monitoring
-#
-
-# mkdir -p /var/lib/{prometheus,grafana}
 
 #
 # Profile
