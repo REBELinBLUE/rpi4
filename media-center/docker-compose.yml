@@ -7,7 +7,7 @@ services:
     network_mode: "host"
     volumes:
       - /var/media/plex:/config
-      - /media/NFS:/media/NAS
+      - /media/Media:/media/NAS
     environment:
       PUID: "1000"
       PGID: "1000"
@@ -19,7 +19,7 @@ services:
     container_name: sonarr
     volumes:
       - /var/media/sonarr:/config
-      - /media/NFS:/media/NAS
+      - /media/Media:/media/NAS
     environment:
       PUID: "1000"
       PGID: "1000"

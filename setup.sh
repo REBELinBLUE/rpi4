@@ -27,27 +27,17 @@ rm -f libseccomp2_2.4.4-1~bpo10+1_armhf.deb
 # Mounts and directories
 #
 
-apt install -u cifs-utils postfix samba samba-common-bin smbclient
-# add disable netbios = yes to [global] section of /etc/samba/smb.conf
-#sudo systemctl stop nmbd.service
-#sudo systemctl mask nmbd.service
-#sudo systemctl disable nmbd.service
-mkdir /media/NFS
-echo "192.168.212.135:/mnt/md0/media /media/NFS  nfs      defaults    0       0" >> /etc/fstab
-mount /media/NFS
+mkdir /media/Media
+echo "192.168.115.136:/mnt/md0/media /media/Media  nfs      defaults    0       0" >> /etc/fstab
+mount /media/Media
 
 mkdir /media/Backup
-echo "//192.168.212.135/backup /media/Backup  cifs  username=stephen,password=??????,iocharset=utf8,uid=1000,gid=1000,file_mode=0777,dir_mode=0777,nodfs  0  0" >> /etc/fstab
+echo "192.168.115.136:/mnt/md0/backup /media/Backup  nfs      defaults    0       0" >> /etc/fstab
 mount /media/Backup
 
 # mkdir /media/Torrents
 # echo "192.168.1.112:/nfs/Torrents /media/Torrents  nfs      defaults    0       0" >> /etc/fstab
 # mount /media/Torrents
-
-# Disable zeroconf to stop RPI appearing in Finder
-#sudo systemctl stop avahi-daemon.socket avahi-daemon.service
-#sudo systemctl mask avahi-daemon.socket avahi-daemon.service
-#sudo systemctl disable avahi-daemon.socket avahi-daemon.service
 
 mkdir -p /var/media/{plex,sonarr,tautulli}
 
