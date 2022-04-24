@@ -9,6 +9,8 @@ DB     := "/var/media/plex/Library/Application\ Support/Plex\ Media\ Server/Plug
 ## Starts the containers
 start:
 	docker-compose up -d --remove-orphans
+	docker-compose stop jackett
+	docker-compose stop transmission
 
 ## Stops the containers
 stop:
@@ -25,6 +27,10 @@ update:
 	docker image prune -a -f
 	docker-compose stop jackett
 	docker-compose stop transmission
+
+## Starts the containers needed for torrents
+torrents:
+	docker-compose up -d
 
 ## Cleanup the names of episodes
 cleanup:
