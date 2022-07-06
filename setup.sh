@@ -9,26 +9,31 @@ apt update
 apt upgrade -y
 apt install -u apt-transport-https ca-certificates software-properties-common make fish
 chsh -s /usr/bin/fish
-curl -fsSL https://starship.rs/install.sh | bash
+curl -fsSL https://starship.rs/install.sh | sh
 mkdir -p ~/.config/fish
 echo "starship init fish | source" >>  ~/.config/fish/config.fish
-#mkdir -p ~/.config && touch ~/.config/starship.toml
-#eprintf "[hostname]\ndisabled = true" >>  ~/.config/starship.toml
+mkdir -p ~/.config && touch ~/.config/starship.toml
+printf "[hostname]\ndisabled = true" >>  ~/.config/starship.toml
+
+curl -LJO https://github.com/r-darwish/topgrade/releases/download/v9.0.1/topgrade-v9.0.1-aarch64-unknown-linux-gnu.tar.gz
+tar zvxf topgrade-v9.0.1-aarch64-unknown-linux-gnu.tar.gz
+rm -f topgrade-v9.0.1-aarch64-unknown-linux-gnu.tar.gz
+sudo mv topgrade /usr/local/bin
 
 #
 # https://github.com/linuxserver/docker-radarr/issues/118
 #
 
-wget http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.4.4-1~bpo10+1_armhf.deb
-dpkg -i libseccomp2_2.4.4-1~bpo10+1_armhf.deb
-rm -f libseccomp2_2.4.4-1~bpo10+1_armhf.deb
+# wget http://ftp.us.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.4.4-1~bpo10+1_armhf.deb
+# dpkg -i libseccomp2_2.4.4-1~bpo10+1_armhf.deb
+# rm -f libseccomp2_2.4.4-1~bpo10+1_armhf.deb
 
 #
 # Mounts and directories
 #
 
 mkdir /media/Media
-echo "192.168.115.136:/mnt/md0/media /media/Media  nfs      defaults    0       0" >> /etc/fstab
+sudo echo "192.168.115.136:/mnt/md0/media /media/Media  nfs      defaults    0       0" >> /etc/fstab
 mount /media/Media
 
 mkdir /media/Backup
@@ -64,24 +69,24 @@ pip3 install docker-compose
 # Disable Password Login via SSH
 #
 
-# sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
-# sed -i 's/^#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
-# sed -i 's/^#PubkeyAuthentication yes/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
-# sed -i 's/^UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+sed -i 's/^#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
+sed -i 's/^#PubkeyAuthentication yes/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
+sed -i 's/^UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
 
 #
 # Homebridge
 #
 
 # NodeJS
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
+curl -sL https://deb.nodesource.com/setup_16.x | bash -
 apt install -y nodejs gcc g++ python net-tools
 
 # Needed for Ecovac
 apt install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
 # Install Homebridge
-npm install -g --unsafe-perm homebridge homebridge-config-ui-x @abandonware/noble
+npm install --location=global --unsafe-perm homebridge homebridge-config-ui-x
 sudo hb-service install --user homebridge
 
 #
@@ -93,4 +98,3 @@ ln -s $HOME/rpi4/shell/.bash_prompt $HOME/.bash_prompt
 ln -s $HOME/rpi4/shell/.profile $HOME/.profile
 ln -s $HOME/rpi4/shell/.bashrc $HOME/.bashrc
 ln -s $HOME/rpi4/shell/.dircolors $HOME/.dircolors
-mkdir $HOME/.ssh
