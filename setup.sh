@@ -86,8 +86,11 @@ apt install -y nodejs gcc g++ python net-tools
 apt install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
 # Install Homebridge
-npm install --location=global --unsafe-perm homebridge homebridge-config-ui-x
+sudo npm install --location=global --unsafe-perm homebridge homebridge-config-ui-x
+sudo npm install --location=global homebridge-pihole homebridge-deebotecovacs homebridge-webos-tv homebridge-cmdswitch2 homebridge-sony-audio
 sudo hb-service install --user homebridge
+
+# edit homebridge-sony-audio/dist/discoverer.js, add explicitSocketBind: true to node_ssdp_1.Client()
 
 #
 # Profile
